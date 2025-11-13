@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ink Legacy - Estudio de Tatuajes Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000000;
+            --secondary: #1a1a1a;
+            --accent: #ff0000;
+            --text: #ffffff;
+            --gray: #666666;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent); }
+            50% { text-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent), 0 0 40px var(--accent); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .cart-btn {
+            background: var(--accent);
+            color: var(--text);
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .cart-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--text);
+            color: var(--primary);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23000000"/><path fill="%23ff0000" opacity="0.1" d="M0,300 Q300,200 600,300 T1200,300 L1200,600 L0,600 Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: slideDown 1s ease-out;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero-content .accent-text {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .cta-btn {
+            background: var(--accent);
+            color: var(--text);
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--accent);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .service-card h3 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 5rem 2rem;
+            background: var(--secondary);
+        }
+
+        .products-grid {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--primary);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .product-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: var(--text);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: var(--accent);
+            color: var(--text);
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .add-to-cart:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+        }
+
+        /* Gallery */
+        .gallery {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            height: 300px;
+            background: var(--secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+        }
+
+        .gallery-item::after {
+            content: '👁️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: var(--secondary);
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid var(--accent);
+        }
+
+        .contact-item h3 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item p {
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: var(--text);
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 2rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px #25D366;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-modal.active {
+            display: flex;
+        }
+
+        .cart-content {
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid var(--accent);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .close-cart {
+            background: var(--accent);
+            color: var(--text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--primary);
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+
+        .cart-item-info h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .remove-item {
+            background: var(--accent);
+            color: var(--text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-total {
+            text-align: right;
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--accent);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #25D366;
+            color: var(--text);
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .checkout-btn:hover {
+            background: #1ea952;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 2px solid var(--accent);
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">INK LEGACY</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">INICIO</a></li>
+                <li><a href="#servicios">SERVICIOS</a></li>
+                <li><a href="#productos">PRODUCTOS</a></li>
+                <li><a href="#galeria">GALERÍA</a></li>
+                <li><a href="#contacto">CONTACTO</a></li>
+            </ul>
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 CARRITO
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>INK LEGACY</h1>
+            <p class="subtitle">Arte que <span class="accent-text">MARCA TU PIEL</span> para siempre</p>
+            <button class="cta-btn" onclick="document.getElementById('servicios').scrollIntoView({behavior: 'smooth'})">EXPLORAR</button>
+        </div>
+    </section>
+
+    <section id="servicios" class="services">
+        <h2 class="section-title">NUESTROS SERVICIOS</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>TATUAJE TRADICIONAL</h3>
+                <p>Diseños clásicos con técnicas tradicionales. Calidad premium garantizada.</p>
+                <p class="service-price">Desde $150.000 COP</p>
+            </div>
+            <div class="service-card">
+                <h3>REALISMO</h3>
+                <p>Tatuajes hiperrealistas con detalles impresionantes. Arte en tu piel.</p>
+                <p class="service-price">Desde $300.000 COP</p>
+            </div>
+            <div class="service-card">
+                <h3>BLACKWORK</h3>
+                <p>Diseños en negro sólido con impacto visual máximo. Estilo urbano.</p>
+                <p class="service-price">Desde $200.000 COP</p>
+            </div>
+            <div class="service-card">
+                <h3>COVER UP</h3>
+                <p>Transforma tatuajes antiguos en obras maestras. Nueva vida para tu ink.</p>
+                <p class="service-price">Desde $250.000 COP</p>
+            </div>
+            <div class="service-card">
+                <h3>DISEÑO PERSONALIZADO</h3>
+                <p>Creamos el tatuaje de tus sueños. Único y exclusivo para ti.</p>
+                <p class="service-price">Cotización personalizada</p>
+            </div>
+            <div class="service-card">
+                <h3>MICROPIGMENTACIÓN</h3>
+                <p>Técnicas avanzadas para cejas, labios y más. Resultados naturales.</p>
+                <p class="service-price">Desde $180.000 COP</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="productos" class="products">
+        <h2 class="section-title">PRODUCTOS PREMIUM</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">🧴</div>
+                <div class="product-info">
+                    <h3>CREMA DE CUIDADO</h3>
+                    <p>Bálsamo especial para curación rápida y efectiva de tatuajes.</p>
+                    <p class="product-price">$45.000 COP</p>
+                    <button class="add-to-cart" onclick="addToCart('Crema de Cuidado', 45000)">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🧼</div>
+                <div class="product-info">
+                    <h3>JABÓN ESPECIAL</h3>
+                    <p>Limpieza antibacterial suave para tatuajes nuevos.</p>
+                    <p class="product-price">$35.000 COP</p>
+                    <button class="add-to-cart" onclick="addToCart('Jabón Especial', 35000)">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">💧</div>
+                <div class="product-info">
+                    <h3>LOCIÓN HIDRATANTE</h3>
+                    <p>Mantén tus tatuajes vibrantes y saludables.</p>
+                    <p class="product-price">$55.000 COP</p>
+                    <button class="add-to-cart" onclick="addToCart('Loción Hidratante', 55000)">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🌞</div>
+                <div class="product-info">
+                    <h3>PROTECTOR SOLAR</h3>
+                    <p>Protección UV especializada para tatuajes. Factor 50+.</p>
+                    <p class="product-price">$65.000 COP</p>
+                    <button class="add-to-cart" onclick="addToCart('Protector Solar', 65000)">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">📦</div>
+                <div class="product-info">
+                    <h3>KIT COMPLETO</h3>
+                    <p>Todos los productos esenciales para el cuidado perfecto.</p>
+                    <p class="product-price">$180.000 COP</p>
+                    <button class="add-to-cart" onclick="addToCart('Kit Completo', 180000)">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">💎</div>
+                <div class="product-info">
+                    <h3>BONO DE REGALO</h3>
+                    <p>Tarjeta regalo válida para servicios y productos.</p>
+                    <p class="product-price">$200.000 COP</p>
+                    <button class="add-to-cart" onclick="addToCart('Bono de Regalo', 200000)">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="gallery">
+        <h2 class="section-title">GALERÍA DE TRABAJOS</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" style="background: linear-gradient(135deg, #1a1a1a, #ff0000);"></div>
+            <div class="gallery-item" style="background: linear-gradient(45deg, #000000, #666666);"></div>
+            <div class="gallery-item" style="background: linear-gradient(180deg, #ff0000, #000000);"></div>
+            <div class="gallery-item" style="background: linear-gradient(90deg, #1a1a1a, #ff0000);"></div>
+            <div class="gallery-item" style="background: linear-gradient(225deg, #000000, #ff0000);"></div>
+            <div class="gallery-item" style="background: linear-gradient(315deg, #666666, #000000);"></div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact">
+        <h2 class="section-title">CONTÁCTANOS</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📍 UBICACIÓN</h3>
+                    <p>Calle 10 #43-25, El Poblado<br>Medellín, Antioquia</p>
+                </div>
+                <div class="contact-item">
+                    <h3>⏰ HORARIO</h3>
+                    <p>Lunes a Sábado: 10:00 AM - 8:00 PM<br>Domingos: 12:00 PM - 6:00 PM</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📱 WHATSAPP</h3>
+                    <p>+57 318 456 7890</p>
+                </div>
+            </div>
+            <a href="https://wa.me/573184567890?text=Hola%20Ink%20Legacy,%20quiero%20información%20sobre%20sus%20servicios" class="whatsapp-btn" target="_blank">
+                💬 CHATEAR EN WHATSAPP
+            </a>
+        </div>
+    </section>
+
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>MI CARRITO</h2>
+                <button class="close-cart" onclick="toggleCart()">CERRAR</button>
+            </div>
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                <strong>TOTAL: $<span id="cartTotal">0</span> COP</strong>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">FINALIZAR COMPRA POR WHATSAPP</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 INK LEGACY - Todos los derechos reservados</p>
+        <p>Arte permanente | Calidad garantizada | Medellín, Colombia</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+            alert(`✅ ${name} agregado al carrito`);
+        }
+
+        function updateCart() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+
+            cartCount.textContent = cart.length;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
+                cartTotal.textContent = '0';
+                return;
+            }
+
+            let total = 0;
+            cartItems.innerHTML = cart.map((item, index) => {
+                total += item.price;
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>$${item.price.toLocaleString('es-CO')} COP</p>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">ELIMINAR</button>
+                    </div>
+                `;
+            }).join('');
+
+            cartTotal.textContent = total.toLocaleString('es-CO');
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.classList.toggle('active');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+
+            let message = '¡Hola Ink Legacy! Quiero realizar el siguiente pedido:%0A%0A';
+            let total = 0;
+
+            cart.forEach(item => {
+                message += `• ${item.name}: $${item.price.toLocaleString('es-CO')} COP%0A`;
+                total += item.price;
+            });
+
+            message += `%0ATotal: $${total.toLocaleString('es-CO')} COP%0A%0A¿Cuáles son los métodos de pago disponibles?`;
+
+            window.open(`https://wa.me/573184567890?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
